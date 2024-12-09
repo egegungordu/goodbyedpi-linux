@@ -69,7 +69,6 @@ For other DPI circumvention tools, check out:
 - [Original GoodbyeDPI](https://github.com/ValdikSS/GoodbyeDPI)
 - [Green Tunnel](https://github.com/SadeghHayeri/GreenTunnel)
 - [PowerTunnel](https://github.com/krlvm/PowerTunnel)
-- And others listed in the main project README
 
 ## License
 
