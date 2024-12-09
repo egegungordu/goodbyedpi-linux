@@ -51,7 +51,7 @@ Note: The program requires root privileges to access NFQUEUE and send raw packet
 ## Building
 
 ```bash
-go build ./cmd/goodbyedpi-go
+go build -o goodbyedpi-linux ./cmd/goodbyedpi
 ```
 
 ## Credits
