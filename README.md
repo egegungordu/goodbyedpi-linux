@@ -7,9 +7,13 @@
 ```bash
 # Redirect outgoing HTTP traffic to queue 0 (except our marked packets)
 sudo iptables -A OUTPUT -p tcp --dport 80 -m mark ! --mark 1 -j NFQUEUE --queue-num 0
-
 # Redirect incoming HTTP traffic to queue 0
 sudo iptables -A INPUT -p tcp --sport 80 -j NFQUEUE --queue-num 0
+
+# Redirect outgoing HTTPS traffic to queue 0 (except our marked packets)
+sudo iptables -A OUTPUT -p tcp --dport 443 -m mark ! --mark 1 -j NFQUEUE --queue-num 0
+# Redirect incoming HTTPS traffic to queue 0
+sudo iptables -A INPUT -p tcp --sport 443 -j NFQUEUE --queue-num 0
 
 # Redirect DNS traffic (both UDP and TCP)
 sudo iptables -A OUTPUT -p udp --dport 53 -j NFQUEUE --queue-num 0
@@ -28,15 +32,7 @@ sudo iptables -L -v -n
 ### Reset/Clear Rules
 
 ```bash
-# Delete specific rules
-sudo iptables -D OUTPUT -p tcp --dport 80 -m mark ! --mark 1 -j NFQUEUE --queue-num 0
-sudo iptables -D INPUT -p tcp --sport 80 -j NFQUEUE --queue-num 0
-sudo iptables -D OUTPUT -p udp --dport 53 -j NFQUEUE --queue-num 0
-sudo iptables -D INPUT -p udp --sport 53 -j NFQUEUE --queue-num 0
-sudo iptables -D OUTPUT -p udp --dport 1253 -j NFQUEUE --queue-num 0
-sudo iptables -D INPUT -p udp --sport 1253 -j NFQUEUE --queue-num 0
-
-# Or flush all rules (use with caution)
+# Flush all rules (use with caution)
 sudo iptables -F
 ```
 

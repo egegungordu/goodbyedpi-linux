@@ -19,7 +19,13 @@ func main() {
 	signal.Notify(sigChan, syscall.SIGINT, syscall.SIGTERM)
 
 	// Initialize the proxy server
-	proxyServer, err := proxy.NewServer(true, false, false)
+	// --dns-addr 77.88.8.8 --dns-port 1253 --dnsv6-addr 2a02:6b8::feed:0ff --dnsv6-port 1253
+	proxyServer, err := proxy.NewServer(true, false, false, &proxy.DNSConfig{
+		IPv4Addr: "77.88.8.8",
+		IPv4Port: 1253,
+		IPv6Addr: "2a02:6b8::feed:0ff",
+		IPv6Port: 1253,
+	})
 	if err != nil {
 		log.Fatalf("Failed to create proxy server: %v", err)
 	}
